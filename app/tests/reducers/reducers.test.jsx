@@ -5,7 +5,7 @@ var reducers = require('reducers');
 
 describe('Reducers', () => {
   describe('searchTextReducer', () => {
-    it('should set searchText ', () => {
+    it('should set searchText', () => {
       var action = {
         type: 'SET_SEARCH_TEXT',
         searchText: 'dog'
@@ -16,11 +16,10 @@ describe('Reducers', () => {
     });
   });
 
-  // Test that the showCompletedReducer
   describe('showCompletedReducer', () => {
-    it('should toggle completed', () => {
+    it('should toggle showCompleted', () => {
       var action = {
-        type: 'TOGGLE_SHOW_COMPLETED',
+        type: 'TOGGLE_SHOW_COMPLETED'
       };
       var res = reducers.showCompletedReducer(df(false), df(action));
 
@@ -28,32 +27,31 @@ describe('Reducers', () => {
     });
   });
 
-  describe('todoReducer', () => {
+  describe('todosReducer', () => {
     it('should add new todo', () => {
       var action = {
         type: 'ADD_TODO',
         text: 'Walk the dog'
       };
-      var res = reducers.todoReducer(df([]), df(action));
+      var res = reducers.todosReducer(df([]), df(action));
 
       expect(res.length).toEqual(1);
       expect(res[0].text).toEqual(action.text);
     });
 
-    // defined
     it('should toggle todo', () => {
       var todos = [{
         id: '123',
         text: 'Something',
         completed: true,
         createdAt: 123,
-        completededAt: 125
+        completedAt: 125
       }];
       var action = {
         type: 'TOGGLE_TODO',
         id: '123'
       };
-      var res = reducers.todoReducer(df(todos), df(action));
+      var res = reducers.todosReducer(df(todos), df(action));
 
       expect(res[0].completed).toEqual(false);
       expect(res[0].completedAt).toEqual(undefined);
