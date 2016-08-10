@@ -11,60 +11,18 @@ describe('TodoAPI', () => {
     expect(TodoAPI).toExist();
   });
 
-  describe('setTodo', () => {
-    it('should set vaild todos array', () => {
-      var todos = [{
-        id: 12,
-        text: 'Test',
-        completed: false
-      }];
-      TodoAPI.setTodos(todos);
-
-      var actualTodos = JSON.parse(localStorage.getItem('todos'));
-
-      expect(actualTodos).toEqual(todos); // use toEqual for object
-    });
-
-    it('should not set invalid todos array', () => {
-      var badTodos = {a: 'b'};
-      TodoAPI.setTodos(badTodos);
-
-      expect(localStorage.getItem('todos')).toBe(null);
-    });
-
-  });
-
-  describe('getTodo', () => {
-    it('should return empty array for bad localStorage data', () => {
-      var actualTodos = TodoAPI.getTodos();
-      expect(actualTodos).toEqual([]);
-    });
-
-    it('should return todos if valid array in localStorage', () => {
-      var todos = [{
-        id: 12,
-        text: 'Test',
-        completed: false
-      }];
-      localStorage.setItem('todos', JSON.stringify(todos));
-      var actualTodos = TodoAPI.getTodos();
-
-      expect(actualTodos).toEqual(todos);
-    });
-  });
-
-  describe('filteredTodos', () => {
+  describe('filterTodos', () => {
     var todos = [{
       id: 1,
-      text: 'Some text',
+      text: 'Some text here',
       completed: true
     },{
       id: 2,
-      text: 'Other text',
+      text: 'Other text here',
       completed: false
     },{
       id: 3,
-      text: 'Some more text',
+      text: 'Some text here',
       completed: true
     }];
 
@@ -73,7 +31,7 @@ describe('TodoAPI', () => {
       expect(filteredTodos.length).toBe(3);
     });
 
-    it('should return non-completed todos if showCompleted is false', () => {
+    it('should return non-completed todos when showCompleted is false', () => {
       var filteredTodos = TodoAPI.filterTodos(todos, false, '');
       expect(filteredTodos.length).toBe(1);
     });
@@ -92,7 +50,5 @@ describe('TodoAPI', () => {
       var filteredTodos = TodoAPI.filterTodos(todos, true, '');
       expect(filteredTodos.length).toBe(3);
     });
-
   });
-
 });
